@@ -18,7 +18,7 @@ export enum style {
 }
 export function bar (msg: string, player: BukkitPlayer = magik.getSender()) {
     let _bar = magik.Bars.addBar(player,
-        magik.TextComponent(msg),
+        magik.TextComponent(msg + ""),
         magik.Bars.Color.RED,
         magik.Bars.Style.NOTCHED_20,
         0.5 // Progress (0.0 - 1.0)

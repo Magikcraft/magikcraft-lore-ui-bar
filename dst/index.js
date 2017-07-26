@@ -20,7 +20,7 @@ var style;
 })(style = exports.style || (exports.style = {}));
 function bar(msg, player) {
     if (player === void 0) { player = magik.getSender(); }
-    var _bar = magik.Bars.addBar(player, magik.TextComponent(msg), magik.Bars.Color.RED, magik.Bars.Style.NOTCHED_20, 0.5 // Progress (0.0 - 1.0)
+    var _bar = magik.Bars.addBar(player, magik.TextComponent(msg + ""), magik.Bars.Color.RED, magik.Bars.Style.NOTCHED_20, 0.5 // Progress (0.0 - 1.0)
     );
     var Bar = {
         _bar: _bar,
