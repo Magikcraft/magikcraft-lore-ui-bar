@@ -22,25 +22,26 @@ function bar(player) {
     if (player === void 0) { player = magik.getSender(); }
     var _bar = magik.Bars.addBar(player, magik.TextComponent(""), magik.Bars.Color.RED, magik.Bars.Style.NOTCHED_20, 0.5 // Progress (0.0 - 1.0)
     );
-    return {
+    var Bar = {
         _bar: _bar,
         text: function (msg) {
             _bar.setMessage(msg);
-            return this;
+            return Bar;
         },
         color: function (color) {
             _bar.setColor(color);
-            return this;
+            return Bar;
         },
         style: function (style) {
             _bar.setStyle(style);
-            return this;
+            return Bar;
         },
         progress: function (progress) {
             if (progress === void 0) { progress = 0.5; }
             _bar.setProgress(progress);
-            return this;
+            return Bar;
         }
     };
+    return Bar;
 }
 exports.bar = bar;

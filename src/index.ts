@@ -23,25 +23,26 @@ export function bar (player: BukkitPlayer = magik.getSender()) {
         magik.Bars.Style.NOTCHED_20,
         0.5 // Progress (0.0 - 1.0)
     );
-    return {
+    let Bar = {
         _bar,
         text: function(msg: string) {
             (_bar as any).setMessage(msg);
-            return this;
+            return Bar;
         },
         color: function(color: BarsColor) {
             _bar.setColor(color);
-            return this;
+            return Bar;
         },
         style: function(style: style) {
             (_bar as any).setStyle(style);
-            return this;
+            return Bar;
         },
         progress: function(progress: number = 0.5) {
             _bar.setProgress(progress);
-            return this;
+            return Bar;
         }
     }
+    return Bar;
 }
 
 
