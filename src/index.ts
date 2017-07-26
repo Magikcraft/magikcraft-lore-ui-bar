@@ -26,19 +26,19 @@ export function bar (player: BukkitPlayer = magik.getSender()) {
     let Bar = {
         _bar,
         text: function(msg: string) {
-            (_bar as any).setMessage(msg);
+            (Bar._bar as any).setMessage(msg);
             return Bar;
         },
         color: function(color: BarsColor) {
-            _bar.setColor(color);
+            Bar._bar.setColor(color);
             return Bar;
         },
         style: function(style: style) {
-            (_bar as any).setStyle(style);
+            (Bar._bar as any).setStyle(style);
             return Bar;
         },
         progress: function(progress: number = 0.5) {
-            _bar.setProgress(progress);
+            Bar._bar.setProgress(progress);
             return Bar;
         }
     }

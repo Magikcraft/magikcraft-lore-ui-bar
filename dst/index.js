@@ -25,20 +25,20 @@ function bar(player) {
     var Bar = {
         _bar: _bar,
         text: function (msg) {
-            _bar.setMessage(msg);
+            Bar._bar.setMessage(msg);
             return Bar;
         },
         color: function (color) {
-            _bar.setColor(color);
+            Bar._bar.setColor(color);
             return Bar;
         },
         style: function (style) {
-            _bar.setStyle(style);
+            Bar._bar.setStyle(style);
             return Bar;
         },
         progress: function (progress) {
             if (progress === void 0) { progress = 0.5; }
-            _bar.setProgress(progress);
+            Bar._bar.setProgress(progress);
             return Bar;
         }
     };
