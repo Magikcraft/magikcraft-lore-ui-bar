@@ -4,28 +4,29 @@ var magik = magikcraft.io;
 var Color = magik.Bars.Color;
 var color;
 (function (color) {
-    color[color["GREEN"] = Color.GREEN] = "GREEN";
-    color[color["RED"] = Color.RED] = "RED";
-    color[color["PURPLE"] = Color.PURPLE] = "PURPLE";
-    color[color["PINK"] = Color.PINK] = "PINK";
-    color[color["WHITE"] = Color.WHITE] = "WHITE";
-    color[color["YELLOW"] = Color.YELLOW] = "YELLOW";
+    color[color["GREEN"] = magik.Bars.Color.GREEN] = "GREEN";
+    color[color["RED"] = magik.Bars.Color.RED] = "RED";
+    color[color["PURPLE"] = magik.Bars.Color.PURPLE] = "PURPLE";
+    color[color["PINK"] = magik.Bars.Color.PINK] = "PINK";
+    color[color["WHITE"] = magik.Bars.Color.WHITE] = "WHITE";
+    color[color["YELLOW"] = magik.Bars.Color.YELLOW] = "YELLOW";
 })(color = exports.color || (exports.color = {}));
 var Style = magik.Bars.Style;
 var style;
 (function (style) {
-    style[style["NOTCHED_10"] = Style.NOTCHED_10] = "NOTCHED_10";
-    style[style["NOTCHED_12"] = Style.NOTCHED_12] = "NOTCHED_12";
-    style[style["NOTCHED_20"] = Style.NOTCHED_20] = "NOTCHED_20";
+    style[style["NOTCHED_10"] = magik.Bars.Style.NOTCHED_10] = "NOTCHED_10";
+    style[style["NOTCHED_12"] = magik.Bars.Style.NOTCHED_12] = "NOTCHED_12";
+    style[style["NOTCHED_20"] = magik.Bars.Style.NOTCHED_20] = "NOTCHED_20";
 })(style = exports.style || (exports.style = {}));
 function bar(msg, player) {
+    if (msg === void 0) { msg = ""; }
     if (player === void 0) { player = magik.getSender(); }
     var _bar = magik.Bars.addBar(player, magik.TextComponent(msg + ""), magik.Bars.Color.RED, magik.Bars.Style.NOTCHED_20, 0.5 // Progress (0.0 - 1.0)
     );
     var Bar = {
         _bar: _bar,
         text: function (msg) {
-            Bar._bar.setMessage(msg);
+            Bar._bar.setMessage(msg + "");
             return Bar;
         },
         color: function (color) {

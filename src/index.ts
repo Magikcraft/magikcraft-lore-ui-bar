@@ -2,21 +2,21 @@ const magik = magikcraft.io;
 
 const Color = magik.Bars.Color;
 export enum color {
-    'GREEN' = Color.GREEN,
-    'RED' = Color.RED,
-    'PURPLE' = Color.PURPLE,
-    'PINK' = Color.PINK,
-    'WHITE' = Color.WHITE,
-    'YELLOW' = Color.YELLOW
+    'GREEN' = magik.Bars.Color.GREEN,
+    'RED' = magik.Bars.Color.RED,
+    'PURPLE' = magik.Bars.Color.PURPLE,
+    'PINK' = magik.Bars.Color.PINK,
+    'WHITE' = magik.Bars.Color.WHITE,
+    'YELLOW' = magik.Bars.Color.YELLOW
 }
 
 const Style = magik.Bars.Style;
 export enum style {
-    'NOTCHED_10' = Style.NOTCHED_10,
-    'NOTCHED_12' = Style.NOTCHED_12,
-    'NOTCHED_20' = Style.NOTCHED_20
+    'NOTCHED_10' = magik.Bars.Style.NOTCHED_10,
+    'NOTCHED_12' = magik.Bars.Style.NOTCHED_12,
+    'NOTCHED_20' = magik.Bars.Style.NOTCHED_20
 }
-export function bar (msg: string, player: BukkitPlayer = magik.getSender()) {
+export function bar (msg: string = "", player: BukkitPlayer = magik.getSender()) {
     let _bar = magik.Bars.addBar(player,
         magik.TextComponent(msg + ""),
         magik.Bars.Color.RED,
@@ -26,7 +26,7 @@ export function bar (msg: string, player: BukkitPlayer = magik.getSender()) {
     let Bar = {
         _bar,
         text: function(msg: string) {
-            (Bar._bar as any).setMessage(msg);
+            (Bar._bar as any).setMessage(msg + "");
             return Bar;
         },
         color: function(color: BarsColor) {
