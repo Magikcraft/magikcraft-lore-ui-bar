@@ -1,0 +1,44 @@
+{
+  "name": "magikcraft-lore-ui-bar",
+  "version": "1.0.0",
+  "description": "A UI Bar for Magikcraft, based on BossBarAPI",
+  "main": "dst/index.js",
+  "scripts": {
+    "test": "jest",
+    "watch": "tsc --watch",
+    "precommit": "tsc -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwulf/magikcraft-lore-ui-bar.git"
+  },
+  "keywords": [
+    "magikcraft",
+    "minecraft",
+    "ui"
+  ],
+  "author": "The Legendary Josh Wulf (TM)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jwulf/magikcraft-lore-ui-bar/issues"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
+  },
+  "homepage": "https://github.com/jwulf/magikcraft-lore-ui-bar#readme",
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "jest": "^20.0.4",
+    "magikcraft.io": "^0.9.10",
+    "ts-jest": "^20.0.7",
+    "typescript": "2.4"
+  }
+}
