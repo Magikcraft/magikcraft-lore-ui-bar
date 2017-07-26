@@ -7,8 +7,7 @@ A UI Bar based on BossBarAPI for Magikcraft
 const { bar, color, style } = require('magikcraft-lore-ui-bar');
 
 function test() {
-    bar()
-        .text("Hello")
+    bar("Hello")
         .color(color.GREEN)
         .style(style.NOTCHED_10)
         .progress();
@@ -19,8 +18,7 @@ function test() {
 ```
 import { bar, color, style } from 'magikcraft-lore-ui-bar';
 
-bar()
-    .text("Hello")
+bar("Hello")
     .color(color.GREEN)
     .style(style.NOTCHED_10)
     .progress();

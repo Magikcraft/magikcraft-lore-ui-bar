@@ -16,9 +16,9 @@ export enum style {
     'NOTCHED_12' = Style.NOTCHED_12,
     'NOTCHED_20' = Style.NOTCHED_20
 }
-export function bar (player: BukkitPlayer = magik.getSender()) {
+export function bar (msg: string, player: BukkitPlayer = magik.getSender()) {
     let _bar = magik.Bars.addBar(player,
-        magik.TextComponent(""),
+        magik.TextComponent(msg),
         magik.Bars.Color.RED,
         magik.Bars.Style.NOTCHED_20,
         0.5 // Progress (0.0 - 1.0)
@@ -39,6 +39,14 @@ export function bar (player: BukkitPlayer = magik.getSender()) {
         },
         progress: function(progress: number = 0.5) {
             Bar._bar.setProgress(progress);
+            return Bar;
+        },
+        addPlayer: function(player: BukkitPlayer) {
+            Bar._bar.addPlayer(player);
+            return Bar;
+        },
+        removePlayer: function(player: BukkitPlayer) {
+            Bar._bar.removePlayer(player);
             return Bar;
         }
     }

@@ -18,9 +18,9 @@ var style;
     style[style["NOTCHED_12"] = Style.NOTCHED_12] = "NOTCHED_12";
     style[style["NOTCHED_20"] = Style.NOTCHED_20] = "NOTCHED_20";
 })(style = exports.style || (exports.style = {}));
-function bar(player) {
+function bar(msg, player) {
     if (player === void 0) { player = magik.getSender(); }
-    var _bar = magik.Bars.addBar(player, magik.TextComponent(""), magik.Bars.Color.RED, magik.Bars.Style.NOTCHED_20, 0.5 // Progress (0.0 - 1.0)
+    var _bar = magik.Bars.addBar(player, magik.TextComponent(msg), magik.Bars.Color.RED, magik.Bars.Style.NOTCHED_20, 0.5 // Progress (0.0 - 1.0)
     );
     var Bar = {
         _bar: _bar,
@@ -39,6 +39,14 @@ function bar(player) {
         progress: function (progress) {
             if (progress === void 0) { progress = 0.5; }
             Bar._bar.setProgress(progress);
+            return Bar;
+        },
+        addPlayer: function (player) {
+            Bar._bar.addPlayer(player);
+            return Bar;
+        },
+        removePlayer: function (player) {
+            Bar._bar.removePlayer(player);
             return Bar;
         }
     };
