@@ -18,38 +18,58 @@ var style;
     style[style["NOTCHED_12"] = magik.Bars.Style.NOTCHED_12] = "NOTCHED_12";
     style[style["NOTCHED_20"] = magik.Bars.Style.NOTCHED_20] = "NOTCHED_20";
 })(style = exports.style || (exports.style = {}));
-function bar(msg, player) {
-    if (msg === void 0) { msg = ""; }
+function bar(_msg, player) {
+    if (_msg === void 0) { _msg = ""; }
     if (player === void 0) { player = magik.getSender(); }
-    var _bar = magik.Bars.addBar(player, magik.TextComponent(msg + ""), magik.Bars.Color.RED, magik.Bars.Style.NOTCHED_20, 0.5 // Progress (0.0 - 1.0)
-    );
+    var _bar, _color, _style;
     var Bar = {
         _bar: _bar,
-        text: function (msg) {
-            Bar._bar.setMessage(msg + "");
-            return Bar;
-        },
-        color: function (color) {
-            Bar._bar.setColor(color);
-            return Bar;
-        },
-        style: function (style) {
-            Bar._bar.setStyle(style);
-            return Bar;
-        },
-        progress: function (progress) {
-            if (progress === void 0) { progress = 0.5; }
+        _msg: _msg,
+        _color: magik.Bars.Color.RED,
+        _progress: 0.5,
+        _style: magik.Bars.Style.NOTCHED_20,
+        _init: false
+    };
+    Bar.show = function () {
+        Bar._bar = magik.Bars.addBar(player, magik.TextComponent(Bar._msg + ""), Bar._color, Bar._style, Bar._progress // Progress (0.0 - 1.0)
+        );
+        Bar._init = true;
+    };
+    Bar.text = function (msg) {
+        Bar._msg = msg;
+        return Bar;
+    };
+    Bar.color = function (color) {
+        Bar._color = color;
+        return Bar;
+    };
+    Bar.style = function (style) {
+        Bar._style = style;
+        return Bar;
+    };
+    Bar.msg = function (msg) {
+        Bar._msg = msg;
+        return Bar;
+    };
+    Bar.progress = function (progress) {
+        if (progress === void 0) { progress = 50; }
+        Bar._progress = Math.min(progress / 100, 0.99);
+        if (Bar._init) {
             Bar._bar.setProgress(progress);
-            return Bar;
-        },
-        addPlayer: function (player) {
-            Bar._bar.addPlayer(player);
-            return Bar;
-        },
-        removePlayer: function (player) {
-            Bar._bar.removePlayer(player);
-            return Bar;
         }
+        return Bar;
+    };
+    Bar.addPlayer = function (player) {
+        if (Bar._bar.init) {
+            Bar._bar.addPlayer(player);
+        }
+        return Bar;
+    };
+    Bar.removePlayer = function (player) {
+        if (Bar._bar.init) {
+            Bar._bar.removePlayer(player);
+        }
+        return Bar;
     };
     return Bar;
 }
