@@ -4,7 +4,7 @@ A UI Bar for Magikcraft based on BossBarAPI.
 
 See below for examples of how to use the UI Bar fluent API.
 
-
+![UI Bar](https://media.giphy.com/media/xTkcEzfUCkrTC1q6li/giphy.gif)
 # Basic Functionality
 
 ## JavaScript (ES6)
