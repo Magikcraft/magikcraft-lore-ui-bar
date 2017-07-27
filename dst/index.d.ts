@@ -20,5 +20,6 @@ export interface IBar {
     progress(percentage: number): IBar;
     addPlayer(player: BukkitPlayer): IBar;
     removePlayer(player: BukkitPlayer): IBar;
+    destroy(): void;
 }
 export declare function bar(_msg?: string, player?: BukkitPlayer): IBar;

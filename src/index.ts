@@ -24,6 +24,7 @@ export interface IBar {
     progress(percentage: number): IBar;
     addPlayer(player: BukkitPlayer): IBar;
     removePlayer(player: BukkitPlayer): IBar;
+    destroy(): void;
 }
 
 interface _IBar extends IBar {
@@ -93,6 +94,12 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
             Bar._bar.removePlayer(player);
         }
         return Bar;
+    }
+    Bar.destroy = function () {
+        if (Bar._init) {
+            Bar.removePlayer(player);
+        }
+        return undefined;
     }
     return Bar;
 }

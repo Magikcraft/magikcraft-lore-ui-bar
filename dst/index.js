@@ -76,6 +76,12 @@ function bar(_msg, player) {
         }
         return Bar;
     };
+    Bar.destroy = function () {
+        if (Bar._init) {
+            Bar.removePlayer(player);
+        }
+        return undefined;
+    };
     return Bar;
 }
 exports.bar = bar;
