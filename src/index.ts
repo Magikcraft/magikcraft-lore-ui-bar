@@ -16,7 +16,16 @@ export enum style {
     'NOTCHED_12' = magik.Bars.Style.NOTCHED_12,
     'NOTCHED_20' = magik.Bars.Style.NOTCHED_20
 }
-export function bar(_msg: string = "", player: BukkitPlayer = magik.getSender()) {
+export interface IBar {
+    show(): IBar;
+    text(msg: string): IBar;
+    color(color: color): IBar;
+    style(style: style): IBar;
+    progress(percentage: number): IBar;
+    addPlayer(player: BukkitPlayer): IBar;
+    removePlayer(player: BukkitPlayer): IBar;
+}
+export function bar(_msg: string = "", player: BukkitPlayer = magik.getSender()): IBar {
     let _bar, _color, _style;
     let Bar = {
         _bar,
