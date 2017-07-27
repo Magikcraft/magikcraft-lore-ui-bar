@@ -43,9 +43,13 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
         _color: magik.Bars.Color.RED,
         _progress: 0.5,
         _style: magik.Bars.Style.NOTCHED_20,
-        _init: false
+        _init: false,
+        player
     } as any;
     Bar.show = function() {
+        if (Bar._init) {
+            return Bar;
+        }
         Bar._bar = magik.Bars.addBar(player,
             magik.TextComponent(Bar._msg + ""),
             Bar._color,

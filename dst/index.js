@@ -28,9 +28,13 @@ function bar(_msg, player) {
         _color: magik.Bars.Color.RED,
         _progress: 0.5,
         _style: magik.Bars.Style.NOTCHED_20,
-        _init: false
+        _init: false,
+        player: player
     };
     Bar.show = function () {
+        if (Bar._init) {
+            return Bar;
+        }
         Bar._bar = magik.Bars.addBar(player, magik.TextComponent(Bar._msg + ""), Bar._color, Bar._style, Bar._progress // Progress (0.0 - 1.0)
         );
         Bar._init = true;
