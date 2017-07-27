@@ -42,10 +42,17 @@ function bar(_msg, player) {
     };
     Bar.text = function (msg) {
         Bar._msg = msg;
+        if (Bar._init) {
+            Bar.destroy();
+            Bar.show();
+        }
         return Bar;
     };
     Bar.color = function (color) {
         Bar._color = magik.Bars.Color[color];
+        if (Bar._init) {
+            Bar._bar.setColor(Bar._color);
+        }
         return Bar;
     };
     Bar.style = function (style) {
@@ -79,6 +86,7 @@ function bar(_msg, player) {
     Bar.destroy = function () {
         if (Bar._init) {
             Bar.removePlayer(player);
+            Bar._init = false;
         }
         return undefined;
     };

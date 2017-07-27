@@ -62,10 +62,17 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
     }
     Bar.text = function (msg: string) {
         Bar._msg = msg;
+        if (Bar._init) {
+            Bar.destroy();
+            Bar.show();
+        }
         return Bar;
     };
     Bar.color = function (color: color) {
         Bar._color = (magik.Bars.Color as any)[color];
+        if (Bar._init) {
+            Bar._bar.setColor(Bar._color);
+        }
         return Bar;
     };
     Bar.style = function (style: style) {
@@ -98,6 +105,7 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
     Bar.destroy = function () {
         if (Bar._init) {
             Bar.removePlayer(player);
+            Bar._init = false;
         }
         return undefined;
     }
