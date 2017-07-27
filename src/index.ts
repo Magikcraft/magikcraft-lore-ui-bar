@@ -25,9 +25,19 @@ export interface IBar {
     addPlayer(player: BukkitPlayer): IBar;
     removePlayer(player: BukkitPlayer): IBar;
 }
-export function bar(_msg: string = "", player: BukkitPlayer = magik.getSender()): IBar {
+
+interface _IBar extends IBar {
+    _bar: BossBar;
+    _msg: string;
+    _color: BarsColor;
+    _progress: number;
+    _style: BarsStyle;
+    _init: boolean;
+}
+
+export function bar(_msg = "", player = magik.getSender()): IBar {
     let _bar, _color, _style;
-    let Bar = {
+    let Bar: _IBar = {
         _bar,
         _msg,
         _color: magik.Bars.Color.RED,
@@ -43,20 +53,21 @@ export function bar(_msg: string = "", player: BukkitPlayer = magik.getSender())
             Bar._progress // Progress (0.0 - 1.0)
         );
         Bar._init = true;
+        return Bar;
     }
     Bar.text = function (msg: string) {
         Bar._msg = msg;
         return Bar;
     };
     Bar.color = function (color: color) {
-        Bar._color = color;
+        Bar._color = (magik.Bars.Color as any)[color];
         return Bar;
     };
     Bar.style = function (style: style) {
-        Bar._style = style;
+        Bar._style = (magik.Bars.Style as any)[style];
         return Bar;
     };
-    Bar.msg = function (msg: string) {
+    Bar.text = function (msg: string) {
         Bar._msg = msg;
         return Bar;
     }
@@ -68,13 +79,13 @@ export function bar(_msg: string = "", player: BukkitPlayer = magik.getSender())
         return Bar;
     };
     Bar.addPlayer = function (player: BukkitPlayer) {
-        if (Bar._bar.init) {
+        if (Bar._init) {
             Bar._bar.addPlayer(player);
         }
         return Bar;
     };
     Bar.removePlayer = function (player: BukkitPlayer) {
-        if (Bar._bar.init) {
+        if (Bar._init) {
             Bar._bar.removePlayer(player);
         }
         return Bar;

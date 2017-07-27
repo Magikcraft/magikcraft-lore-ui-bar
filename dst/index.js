@@ -34,20 +34,21 @@ function bar(_msg, player) {
         Bar._bar = magik.Bars.addBar(player, magik.TextComponent(Bar._msg + ""), Bar._color, Bar._style, Bar._progress // Progress (0.0 - 1.0)
         );
         Bar._init = true;
+        return Bar;
     };
     Bar.text = function (msg) {
         Bar._msg = msg;
         return Bar;
     };
     Bar.color = function (color) {
-        Bar._color = color;
+        Bar._color = magik.Bars.Color[color];
         return Bar;
     };
     Bar.style = function (style) {
-        Bar._style = style;
+        Bar._style = magik.Bars.Style[style];
         return Bar;
     };
-    Bar.msg = function (msg) {
+    Bar.text = function (msg) {
         Bar._msg = msg;
         return Bar;
     };
@@ -60,13 +61,13 @@ function bar(_msg, player) {
         return Bar;
     };
     Bar.addPlayer = function (player) {
-        if (Bar._bar.init) {
+        if (Bar._init) {
             Bar._bar.addPlayer(player);
         }
         return Bar;
     };
     Bar.removePlayer = function (player) {
-        if (Bar._bar.init) {
+        if (Bar._init) {
             Bar._bar.removePlayer(player);
         }
         return Bar;
