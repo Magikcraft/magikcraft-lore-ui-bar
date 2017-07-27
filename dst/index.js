@@ -40,14 +40,6 @@ function bar(_msg, player) {
         Bar._init = true;
         return Bar;
     };
-    Bar.text = function (msg) {
-        Bar._msg = msg;
-        if (Bar._init) {
-            Bar.destroy();
-            Bar.show();
-        }
-        return Bar;
-    };
     Bar.color = function (color) {
         Bar._color = magik.Bars.Color[color];
         if (Bar._init) {
@@ -61,6 +53,10 @@ function bar(_msg, player) {
     };
     Bar.text = function (msg) {
         Bar._msg = msg;
+        if (Bar._init) {
+            Bar.destroy();
+            Bar.show();
+        }
         return Bar;
     };
     Bar.progress = function (progress) {

@@ -60,14 +60,6 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
         Bar._init = true;
         return Bar;
     }
-    Bar.text = function (msg: string) {
-        Bar._msg = msg;
-        if (Bar._init) {
-            Bar.destroy();
-            Bar.show();
-        }
-        return Bar;
-    };
     Bar.color = function (color: color) {
         Bar._color = (magik.Bars.Color as any)[color];
         if (Bar._init) {
@@ -81,6 +73,10 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
     };
     Bar.text = function (msg: string) {
         Bar._msg = msg;
+        if (Bar._init) {
+            Bar.destroy();
+            Bar.show();
+        }
         return Bar;
     }
     Bar.progress = function (progress: number = 50) {
