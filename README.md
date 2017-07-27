@@ -2,9 +2,8 @@
 
 A UI Bar for Magikcraft based on BossBarAPI.
 
-After the show method is called, the UI Bar will appear in the user's display.
+See below for examples of how to use the UI Bar fluent API.
 
-After show has been called, only progress and color can be changed. To change the text, you must call the `destroy()` method and create a new bar with the new text.
 
 # Basic Functionality
 
@@ -21,7 +20,6 @@ function test() {
         .show();
 }
 ```
-
 ## TypeScript
 ```
 import { bar, color, style } from 'magikcraft-lore-ui-bar';
@@ -59,7 +57,8 @@ function test() {
     setTimeout(() => b.progress(70), 4000);
 
     // Change message, color, and progress
-    setTimeout(() => b.text("Goodbye").progress(65).color(color.PURPLE), 6000);
+    setTimeout(() => b.text("Goodbye").progress(65).color(color.PURPLE),
+    6000);
 
     // Remove bar
     setTimeout(() => b.destroy(), 8000);
