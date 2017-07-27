@@ -1,10 +1,12 @@
 # magikcraft-lore-ui-bar
 
-A UI Bar for Magikcraft based on BossBarAPI.
+A UI Bar for Magikcraft with a fluent API. Based on BossBarAPI.
 
-See below for examples of how to use the UI Bar fluent API.
 
 ![UI Bar](https://media.giphy.com/media/xTkcEzfUCkrTC1q6li/giphy.gif)
+
+
+See below for examples of how to use the UI Bar fluent API.
 # Basic Functionality
 
 ## JavaScript (ES6)
