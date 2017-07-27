@@ -1,6 +1,6 @@
 # magikcraft-lore-ui-bar
 
-A UI Bar for Magikcraft with a fluent API. Based on BossBarAPI.
+A UI Bar for Magikcraft with a fluent API. Based on [BossBarAPI](https://www.spigotmc.org/resources/api-bossbarapi-1-7-1-8-1-9-1-10.7504/).
 
 
 ![UI Bar](https://media.giphy.com/media/xTkcEzfUCkrTC1q6li/giphy.gif)
