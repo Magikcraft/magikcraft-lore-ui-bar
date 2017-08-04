@@ -23,3 +23,11 @@ export interface IBar {
     destroy(): void;
 }
 export declare function bar(_msg?: string, player?: BukkitPlayer): IBar;
+export declare const _lore: {
+    namespace: string;
+    loreToLoad: {
+        name: string;
+        code: (canon: any) => (msg: string, _player: BukkitPlayer) => IBar;
+        cost: number;
+    }[];
+};

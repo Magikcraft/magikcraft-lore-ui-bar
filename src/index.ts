@@ -47,7 +47,7 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
         _init: false,
         player
     } as any;
-    Bar.show = function() {
+    Bar.show = function () {
         if (Bar._init) {
             return Bar;
         }
@@ -108,5 +108,29 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
     return Bar;
 }
 
+/**
+ *
+ * In this function we return a partially bound versino of bar that can be loaded as a lore at boot time. This means that users can use magikcraft.io.lore.sitapati.bar and get a bar in the UI.
+ *
+ * @param {*} canon
+ * @returns
+ */
+function barWithClosure(canon: any, ) {
+    const player = canon.magik.getSender();
+    return function (msg: string, _player: BukkitPlayer) {
+        _player = (_player)? _player: player;
+        return bar(msg, _player);
+    }
+}
 
+export const _lore = {
+    namespace: 'sitapati',
+    loreToLoad: [
+        {
+            name: 'bar',
+            code: barWithClosure,
+            cost: 0
+        }
+    ]
+}
 
