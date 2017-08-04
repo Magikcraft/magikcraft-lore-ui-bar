@@ -116,7 +116,7 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
  * @returns
  */
 function barWithClosure(canon: any, ) {
-    const player = canon.magik.sender;
+    const player = canon.sender;
     return function (msg: string, _player: BukkitPlayer) {
         _player = (_player)? _player: player;
         return bar(msg, _player);
