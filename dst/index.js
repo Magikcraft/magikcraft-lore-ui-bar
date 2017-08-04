@@ -89,3 +89,27 @@ function bar(_msg, player) {
     return Bar;
 }
 exports.bar = bar;
+/**
+ *
+ * In this function we return a partially bound versino of bar that can be loaded as a lore at boot time. This means that users can use magikcraft.io.lore.sitapati.bar and get a bar in the UI.
+ *
+ * @param {*} canon
+ * @returns
+ */
+function barWithClosure(canon) {
+    var player = canon.magik.getSender();
+    return function (msg, _player) {
+        _player = (_player) ? _player : player;
+        return bar(msg, _player);
+    };
+}
+exports._lore = {
+    namespace: 'sitapati',
+    loreToLoad: [
+        {
+            name: 'bar',
+            code: barWithClosure,
+            cost: 0
+        }
+    ]
+};
