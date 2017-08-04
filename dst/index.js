@@ -97,7 +97,7 @@ exports.bar = bar;
  * @returns
  */
 function barWithClosure(canon) {
-    var player = canon.magik.sender;
+    var player = canon.sender;
     return function (msg, _player) {
         _player = (_player) ? _player : player;
         return bar(msg, _player);
