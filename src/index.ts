@@ -1,11 +1,55 @@
 const magik = magikcraft.io;
 
+/**
+ *
+ * new ComponentBuilder( "Hello " ).color( ChatColor.RED ).bold( true ).append( "world" ).color( ChatColor.BLUE ).append( "!" ).color( ChatColor.RED ).create();
+ */
+export const ComponentBuilder = (msg: string): IComponentBuilder => new (Java.type('net.md_5.bungee.api.chat.ComponentBuilder') as any)(msg);
+
+const _ChatColor = Java.type('net.md_5.bungee.api.ChatColor');
+
+export enum ChatColor {
+    'AQUA' = _ChatColor.AQUA,
+    'BLACK' = _ChatColor.BLACK,
+    'BLUE' = _ChatColor.BLUE,
+    'BOLD' = _ChatColor.BOLD,
+    'DARK_AQUA' = _ChatColor.DARK_AQUA,
+    'DARK_BLUE' = _ChatColor.DARK_BLUE,
+    'DARK_GRAY' = _ChatColor.DARK_GRAY,
+    'DARK_GREEN' = _ChatColor.DARK_GREEN,
+    'DARK_PURPLE' = _ChatColor.DARK_PURPLE,
+    'DARK_RED' = _ChatColor.DARK_RED,
+    'GOLD' = _ChatColor.GOLD,
+    'GRAY' = _ChatColor.GRAY,
+    'GREEN' = _ChatColor.GREEN,
+    'ITALIC' = _ChatColor.ITALIC,
+    'LIGHT_PURPLE' = _ChatColor.LIGHT_PURPLE,
+    'MAGIC' = _ChatColor.MAGIC,
+    'RED' = _ChatColor.RED,
+    'RESET' = _ChatColor.RESET,
+    'STRIKETHROUGH' = _ChatColor.STRIKETHROUGH,
+    'UNDERLINE' = _ChatColor.UNDERLINE,
+    'WHITE' = _ChatColor.WHITE,
+    'YELLOW' = _ChatColor.YELLOW
+}
+export interface IComponentBuilder {
+    (text: string): IComponentBuilder;
+    append(msg: string): IComponentBuilder;
+    bold(bold: boolean): IComponentBuilder;
+    color(color: ChatColor): IComponentBuilder;
+    create(): TextComponent;
+    italic(italic: boolean): IComponentBuilder;
+    strikethrough(strikethrough: boolean): IComponentBuilder;
+    underlined(underlined: boolean): IComponentBuilder;
+}
+
 const Color = magik.Bars.Color;
 export enum color {
+    'BLUE' = magik.Bars.Color.BLUE,
     'GREEN' = magik.Bars.Color.GREEN,
-    'RED' = magik.Bars.Color.RED,
-    'PURPLE' = magik.Bars.Color.PURPLE,
     'PINK' = magik.Bars.Color.PINK,
+    'PURPLE' = magik.Bars.Color.PURPLE,
+    'RED' = magik.Bars.Color.RED,
     'WHITE' = magik.Bars.Color.WHITE,
     'YELLOW' = magik.Bars.Color.YELLOW
 }
@@ -19,6 +63,7 @@ export enum style {
 export interface IBar {
     show(): IBar;
     text(msg: string): IBar;
+    text(textComponent: TextComponent): IBar;
     color(color: color): IBar;
     style(style: style): IBar;
     progress(percentage: number): IBar;
@@ -34,6 +79,7 @@ interface _IBar extends IBar {
     _progress: number;
     _style: BarsStyle;
     _init: boolean;
+    _textComponent: TextComponent;
 }
 
 export function bar(_msg = "", player = magik.getSender()): IBar {
@@ -45,14 +91,16 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
         _progress: 0.5,
         _style: magik.Bars.Style.NOTCHED_20,
         _init: false,
+        _textComponent: undefined,
         player
     } as any;
     Bar.show = function () {
         if (Bar._init) {
             return Bar;
         }
+        const textComponent = (Bar._textComponent) ? Bar._textComponent : magik.TextComponent(Bar._msg + "");
         Bar._bar = magik.Bars.addBar(player,
-            magik.TextComponent(Bar._msg + ""),
+            textComponent,
             Bar._color,
             Bar._style,
             Bar._progress // Progress (0.0 - 1.0)
@@ -71,8 +119,13 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
         Bar._style = (magik.Bars.Style as any)[style];
         return Bar;
     };
-    Bar.text = function (msg: string) {
-        Bar._msg = msg;
+    Bar.text = function (msg: string | TextComponent) {
+        if (typeof msg === 'string' || typeof msg === 'number') {
+            Bar._msg = msg + '';
+        } else {
+            Bar._msg = '';
+            Bar._textComponent = msg;
+        }
         if (Bar._init) {
             Bar.destroy();
             Bar.show();
@@ -110,12 +163,12 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
 
 /**
  *
- * In this function we return a partially bound versino of bar that can be loaded as a lore at boot time. This means that users can use magikcraft.io.lore.sitapati.bar and get a bar in the UI.
+ * In this function we return a partially bound version of bar that can be loaded as a lore at boot time. This means that users can use magikcraft.io.lore.sitapati.bar and get a bar in the UI.
  *
  * @param {*} canon
  * @returns
  */
-function barWithClosure(canon: any, ) {
+function barWithClosure(canon: any) {
     const player = canon.sender;
     return function (msg: string, _player: BukkitPlayer) {
         _player = (_player)? _player: player;
@@ -133,4 +186,5 @@ export const _lore = {
         }
     ]
 }
+
 
