@@ -99,5 +99,5 @@ function mct1() {
         .show();
 }
 ```
-![Example with ComponentBuilder text](https://github.com/jwulf/magikcraft-lore-ui-bar/raw/master/src/common/imgs/componentBuilderExample.png "ComponentBuilder Example")
+![Example with ComponentBuilder text](https://github.com/jwulf/magikcraft-lore-ui-bar/raw/master/src/imgs/componentBuilderExample.png "ComponentBuilder Example")
 
