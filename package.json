@@ -1,6 +1,6 @@
 {
   "name": "magikcraft-lore-ui-bar",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A UI Bar for Magikcraft, based on BossBarAPI",
   "main": "dst/index.js",
   "scripts": {
