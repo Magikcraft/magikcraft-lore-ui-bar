@@ -63,7 +63,7 @@ export enum style {
 export interface IBar {
     show(): IBar;
     text(msg: string): IBar;
-    text(textComponent: TextComponent): IBar;
+    textComponent(textComponent: TextComponent): IBar;
     color(color: color): IBar;
     style(style: style): IBar;
     progress(percentage: number): IBar;
@@ -74,12 +74,12 @@ export interface IBar {
 
 interface _IBar extends IBar {
     _bar: BossBar;
-    _msg: string;
+    _msg: string | null;
     _color: BarsColor;
     _progress: number;
     _style: BarsStyle;
     _init: boolean;
-    _textComponent: TextComponent;
+    _textComponent: TextComponent | null;
 }
 
 export function bar(_msg = "", player = magik.getSender()): IBar {
@@ -119,16 +119,18 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
         Bar._style = (magik.Bars.Style as any)[style];
         return Bar;
     };
-    Bar.text = function (msg: string | TextComponent) {
-        if (typeof msg === 'string' || typeof msg === 'number') {
-            Bar._msg = msg + '';
-            if (Bar._textComponent) {
-                delete Bar._textComponent;
-            }
-        } else {
-            Bar._msg = '';
-            Bar._textComponent = msg;
+    Bar.textComponent = function (msg: TextComponent) {
+        Bar._textComponent = msg;
+        Bar._msg = null;
+        if (Bar._init) {
+            Bar.destroy();
+            Bar.show();
         }
+        return Bar;
+    }
+    Bar.text = function (msg: string) {
+        Bar._msg = msg + '';
+        Bar._textComponent = null;
         if (Bar._init) {
             Bar.destroy();
             Bar.show();

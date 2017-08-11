@@ -55,7 +55,7 @@ export declare enum style {
 export interface IBar {
     show(): IBar;
     text(msg: string): IBar;
-    text(textComponent: TextComponent): IBar;
+    textComponent(textComponent: TextComponent): IBar;
     color(color: color): IBar;
     style(style: style): IBar;
     progress(percentage: number): IBar;

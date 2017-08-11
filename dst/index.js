@@ -85,17 +85,18 @@ function bar(_msg, player) {
         Bar._style = magik.Bars.Style[style];
         return Bar;
     };
+    Bar.textComponent = function (msg) {
+        Bar._textComponent = msg;
+        Bar._msg = null;
+        if (Bar._init) {
+            Bar.destroy();
+            Bar.show();
+        }
+        return Bar;
+    };
     Bar.text = function (msg) {
-        if (typeof msg === 'string' || typeof msg === 'number') {
-            Bar._msg = msg + '';
-            if (Bar._textComponent) {
-                delete Bar._textComponent;
-            }
-        }
-        else {
-            Bar._msg = '';
-            Bar._textComponent = msg;
-        }
+        Bar._msg = msg + '';
+        Bar._textComponent = null;
         if (Bar._init) {
             Bar.destroy();
             Bar.show();
