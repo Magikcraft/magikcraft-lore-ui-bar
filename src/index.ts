@@ -1,11 +1,12 @@
 const magik = magikcraft.io;
 
-export const version = '0.0.3';
+export const version = '0.0.4';
 /**
  *
  * new ComponentBuilder( "Hello " ).color( ChatColor.RED ).bold( true ).append( "world" ).color( ChatColor.BLUE ).append( "!" ).color( ChatColor.RED ).create();
  */
-export const ComponentBuilder = (msg: string): IComponentBuilder => new (Java.type('net.md_5.bungee.api.chat.ComponentBuilder') as any)(msg);
+const ComponentBuilderClass = Java.type('net.md_5.bungee.api.chat.ComponentBuilder')
+export const ComponentBuilder = (msg: string): IComponentBuilder => new (ComponentBuilderClass as any)(msg);
 
 const _ChatColor = Java.type('net.md_5.bungee.api.ChatColor');
 

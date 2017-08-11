@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var magik = magikcraft.io;
-exports.version = '0.0.3';
+exports.version = '0.0.4';
 /**
  *
  * new ComponentBuilder( "Hello " ).color( ChatColor.RED ).bold( true ).append( "world" ).color( ChatColor.BLUE ).append( "!" ).color( ChatColor.RED ).create();
  */
-exports.ComponentBuilder = function (msg) { return new (Java.type('net.md_5.bungee.api.chat.ComponentBuilder'))(msg); };
+var ComponentBuilderClass = Java.type('net.md_5.bungee.api.chat.ComponentBuilder');
+exports.ComponentBuilder = function (msg) { return new ComponentBuilderClass(msg); };
 var _ChatColor = Java.type('net.md_5.bungee.api.ChatColor');
 var ChatColor;
 (function (ChatColor) {

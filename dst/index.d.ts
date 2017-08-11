@@ -1,9 +1,5 @@
 /// <reference types="magikcraft.io" />
-export declare const version = "0.0.3";
-/**
- *
- * new ComponentBuilder( "Hello " ).color( ChatColor.RED ).bold( true ).append( "world" ).color( ChatColor.BLUE ).append( "!" ).color( ChatColor.RED ).create();
- */
+export declare const version = "0.0.4";
 export declare const ComponentBuilder: (msg: string) => IComponentBuilder;
 export declare enum ChatColor {
     'AQUA',
