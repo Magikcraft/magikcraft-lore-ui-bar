@@ -1,4 +1,5 @@
 /// <reference types="magikcraft.io" />
+export declare const version = "0.0.1";
 /**
  *
  * new ComponentBuilder( "Hello " ).color( ChatColor.RED ).bold( true ).append( "world" ).color( ChatColor.BLUE ).append( "!" ).color( ChatColor.RED ).create();
