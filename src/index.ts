@@ -121,8 +121,13 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
     };
     Bar.text = function (msg: string | TextComponent) {
         if (typeof msg === 'string' || typeof msg === 'number') {
+            magik.dixit(typeof msg);
             Bar._msg = msg + '';
+            if (Bar._textComponent) {
+                delete Bar._textComponent;
+            }
         } else {
+            magik.dixit(msg.toString());
             Bar._msg = '';
             Bar._textComponent = msg;
         }
