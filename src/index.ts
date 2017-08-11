@@ -1,10 +1,12 @@
 const magik = magikcraft.io;
 
+export const version = '0.0.4';
 /**
  *
  * new ComponentBuilder( "Hello " ).color( ChatColor.RED ).bold( true ).append( "world" ).color( ChatColor.BLUE ).append( "!" ).color( ChatColor.RED ).create();
  */
-export const ComponentBuilder = (msg: string): IComponentBuilder => new (Java.type('net.md_5.bungee.api.chat.ComponentBuilder') as any)(msg);
+const ComponentBuilderClass = Java.type('net.md_5.bungee.api.chat.ComponentBuilder')
+export const ComponentBuilder = (msg: string): IComponentBuilder => new (ComponentBuilderClass as any)(msg);
 
 const _ChatColor = Java.type('net.md_5.bungee.api.ChatColor');
 
@@ -63,7 +65,7 @@ export enum style {
 export interface IBar {
     show(): IBar;
     text(msg: string): IBar;
-    text(textComponent: TextComponent): IBar;
+    textComponent(textComponent: TextComponent): IBar;
     color(color: color): IBar;
     style(style: style): IBar;
     progress(percentage: number): IBar;
@@ -74,12 +76,13 @@ export interface IBar {
 
 interface _IBar extends IBar {
     _bar: BossBar;
-    _msg: string;
+    _msg: string | null;
     _color: BarsColor;
     _progress: number;
     _style: BarsStyle;
     _init: boolean;
-    _textComponent: TextComponent;
+    _textComponent: TextComponent | null;
+    _hasTextComponent: boolean;
 }
 
 export function bar(_msg = "", player = magik.getSender()): IBar {
@@ -92,13 +95,14 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
         _style: magik.Bars.Style.NOTCHED_20,
         _init: false,
         _textComponent: undefined,
+        _hasTextComponent: false,
         player
     } as any;
     Bar.show = function () {
         if (Bar._init) {
             return Bar;
         }
-        const textComponent = (Bar._textComponent) ? Bar._textComponent : magik.TextComponent(Bar._msg + "");
+        const textComponent = (Bar._hasTextComponent) ? magik.TextComponent(Bar._textComponent) : magik.TextComponent(Bar._msg + "");
         Bar._bar = magik.Bars.addBar(player,
             textComponent,
             Bar._color,
@@ -119,13 +123,20 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
         Bar._style = (magik.Bars.Style as any)[style];
         return Bar;
     };
-    Bar.text = function (msg: string | TextComponent) {
-        if (typeof msg === 'string' || typeof msg === 'number') {
-            Bar._msg = msg + '';
-        } else {
-            Bar._msg = '';
-            Bar._textComponent = msg;
+    Bar.textComponent = function (msg: TextComponent) {
+        Bar._textComponent = msg;
+        Bar._hasTextComponent = true;
+        Bar._msg = null;
+        if (Bar._init) {
+            Bar.destroy();
+            Bar.show();
         }
+        return Bar;
+    }
+    Bar.text = function (msg: string) {
+        Bar._msg = msg + '';
+        Bar._textComponent = null;
+        Bar._hasTextComponent = false;
         if (Bar._init) {
             Bar.destroy();
             Bar.show();

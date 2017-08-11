@@ -1,8 +1,5 @@
 /// <reference types="magikcraft.io" />
-/**
- *
- * new ComponentBuilder( "Hello " ).color( ChatColor.RED ).bold( true ).append( "world" ).color( ChatColor.BLUE ).append( "!" ).color( ChatColor.RED ).create();
- */
+export declare const version = "0.0.4";
 export declare const ComponentBuilder: (msg: string) => IComponentBuilder;
 export declare enum ChatColor {
     'AQUA',
@@ -55,7 +52,7 @@ export declare enum style {
 export interface IBar {
     show(): IBar;
     text(msg: string): IBar;
-    text(textComponent: TextComponent): IBar;
+    textComponent(textComponent: TextComponent): IBar;
     color(color: color): IBar;
     style(style: style): IBar;
     progress(percentage: number): IBar;

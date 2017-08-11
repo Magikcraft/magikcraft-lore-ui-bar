@@ -1,11 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var magik = magikcraft.io;
+exports.version = '0.0.4';
 /**
  *
  * new ComponentBuilder( "Hello " ).color( ChatColor.RED ).bold( true ).append( "world" ).color( ChatColor.BLUE ).append( "!" ).color( ChatColor.RED ).create();
  */
-exports.ComponentBuilder = function (msg) { return new (Java.type('net.md_5.bungee.api.chat.ComponentBuilder'))(msg); };
+var ComponentBuilderClass = Java.type('net.md_5.bungee.api.chat.ComponentBuilder');
+exports.ComponentBuilder = function (msg) { return new ComponentBuilderClass(msg); };
 var _ChatColor = Java.type('net.md_5.bungee.api.ChatColor');
 var ChatColor;
 (function (ChatColor) {
@@ -62,13 +64,14 @@ function bar(_msg, player) {
         _style: magik.Bars.Style.NOTCHED_20,
         _init: false,
         _textComponent: undefined,
+        _hasTextComponent: false,
         player: player
     };
     Bar.show = function () {
         if (Bar._init) {
             return Bar;
         }
-        var textComponent = (Bar._textComponent) ? Bar._textComponent : magik.TextComponent(Bar._msg + "");
+        var textComponent = (Bar._hasTextComponent) ? magik.TextComponent(Bar._textComponent) : magik.TextComponent(Bar._msg + "");
         Bar._bar = magik.Bars.addBar(player, textComponent, Bar._color, Bar._style, Bar._progress // Progress (0.0 - 1.0)
         );
         Bar._init = true;
@@ -85,14 +88,20 @@ function bar(_msg, player) {
         Bar._style = magik.Bars.Style[style];
         return Bar;
     };
+    Bar.textComponent = function (msg) {
+        Bar._textComponent = msg;
+        Bar._hasTextComponent = true;
+        Bar._msg = null;
+        if (Bar._init) {
+            Bar.destroy();
+            Bar.show();
+        }
+        return Bar;
+    };
     Bar.text = function (msg) {
-        if (typeof msg === 'string' || typeof msg === 'number') {
-            Bar._msg = msg + '';
-        }
-        else {
-            Bar._msg = '';
-            Bar._textComponent = msg;
-        }
+        Bar._msg = msg + '';
+        Bar._textComponent = null;
+        Bar._hasTextComponent = false;
         if (Bar._init) {
             Bar.destroy();
             Bar.show();
