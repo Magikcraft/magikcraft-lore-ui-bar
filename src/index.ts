@@ -102,8 +102,9 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
             return Bar;
         }
         const textComponent = (Bar._hasTextComponent) ? Bar._textComponent : magik.TextComponent(Bar._msg + "");
-        magik.dixit('TextComponent');
-        magik.dixit(textComponent);
+        const label = (Bar._hasTextComponent)? 'TextComponent': 'String Message';
+        magik.dixit(label);
+        magik.dixit(textComponent.toString());
         Bar._bar = magik.Bars.addBar(player,
             textComponent,
             Bar._color,
