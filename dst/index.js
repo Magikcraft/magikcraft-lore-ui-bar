@@ -71,7 +71,7 @@ function bar(_msg, player) {
         if (Bar._init) {
             return Bar;
         }
-        var textComponent = (Bar._hasTextComponent) ? Bar._textComponent : magik.TextComponent(Bar._msg + "");
+        var textComponent = (Bar._hasTextComponent) ? magik.TextComponent(Bar._textComponent) : magik.TextComponent(Bar._msg + "");
         var label = (Bar._hasTextComponent) ? 'TextComponent' : 'String Message';
         magik.dixit(label);
         magik.dixit(textComponent.toString());
