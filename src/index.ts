@@ -81,6 +81,7 @@ interface _IBar extends IBar {
     _style: BarsStyle;
     _init: boolean;
     _textComponent: TextComponent | null;
+    _hasTextComponent: boolean;
 }
 
 export function bar(_msg = "", player = magik.getSender()): IBar {
@@ -93,13 +94,14 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
         _style: magik.Bars.Style.NOTCHED_20,
         _init: false,
         _textComponent: undefined,
+        _hasTextComponent: false,
         player
     } as any;
     Bar.show = function () {
         if (Bar._init) {
             return Bar;
         }
-        const textComponent = (Bar._textComponent) ? Bar._textComponent : magik.TextComponent(Bar._msg + "");
+        const textComponent = (Bar._hasTextComponent) ? Bar._textComponent : magik.TextComponent(Bar._msg + "");
         Bar._bar = magik.Bars.addBar(player,
             textComponent,
             Bar._color,
@@ -122,6 +124,7 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
     };
     Bar.textComponent = function (msg: TextComponent) {
         Bar._textComponent = msg;
+        Bar._hasTextComponent = true;
         Bar._msg = null;
         if (Bar._init) {
             Bar.destroy();
@@ -132,6 +135,7 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
     Bar.text = function (msg: string) {
         Bar._msg = msg + '';
         Bar._textComponent = null;
+        Bar._hasTextComponent = false;
         if (Bar._init) {
             Bar.destroy();
             Bar.show();

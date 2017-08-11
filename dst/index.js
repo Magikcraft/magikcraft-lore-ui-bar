@@ -63,13 +63,14 @@ function bar(_msg, player) {
         _style: magik.Bars.Style.NOTCHED_20,
         _init: false,
         _textComponent: undefined,
+        _hasTextComponent: false,
         player: player
     };
     Bar.show = function () {
         if (Bar._init) {
             return Bar;
         }
-        var textComponent = (Bar._textComponent) ? Bar._textComponent : magik.TextComponent(Bar._msg + "");
+        var textComponent = (Bar._hasTextComponent) ? Bar._textComponent : magik.TextComponent(Bar._msg + "");
         Bar._bar = magik.Bars.addBar(player, textComponent, Bar._color, Bar._style, Bar._progress // Progress (0.0 - 1.0)
         );
         Bar._init = true;
@@ -88,6 +89,7 @@ function bar(_msg, player) {
     };
     Bar.textComponent = function (msg) {
         Bar._textComponent = msg;
+        Bar._hasTextComponent = true;
         Bar._msg = null;
         if (Bar._init) {
             Bar.destroy();
@@ -98,6 +100,7 @@ function bar(_msg, player) {
     Bar.text = function (msg) {
         Bar._msg = msg + '';
         Bar._textComponent = null;
+        Bar._hasTextComponent = false;
         if (Bar._init) {
             Bar.destroy();
             Bar.show();
