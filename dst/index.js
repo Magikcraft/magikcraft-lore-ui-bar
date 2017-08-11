@@ -94,6 +94,7 @@ function bar(_msg, player) {
             }
         }
         else {
+            magik.dixit('Setting _textComponent');
             magik.dixit(msg.toString());
             Bar._msg = '';
             Bar._textComponent = msg;

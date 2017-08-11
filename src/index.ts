@@ -127,6 +127,7 @@ export function bar(_msg = "", player = magik.getSender()): IBar {
                 delete Bar._textComponent;
             }
         } else {
+            magik.dixit('Setting _textComponent');
             magik.dixit(msg.toString());
             Bar._msg = '';
             Bar._textComponent = msg;
