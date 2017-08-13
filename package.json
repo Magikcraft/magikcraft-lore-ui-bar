@@ -12,6 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/jwulf/magikcraft-lore-ui-bar.git"
   },
+  "typings": "dst/index.d.ts",
   "keywords": [
     "magikcraft",
     "minecraft",
